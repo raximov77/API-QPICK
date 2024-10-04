@@ -5,35 +5,50 @@ import React from 'react'
 
 function ProductItem({item}) {
   return (
-   /*  <li className='w-[250px] p-5 rounded-xl bg-white shadow-md'>
-        <img className='rounded-md' src={item.images[0]} alt="Product img" width={200} height={300}/>
-        <h2><b>Title:</b> {item.title}</h2>
-        <p><b>Price:</b> {item.price}</p>
-        <p className='line-clamp-3'><b>Description:</b> {item.description}</p>
-        <p><b>Category:</b> {item.category.name}</p>
-    </li> */
     <Card
-    style={{
-      width: 300,
-    }}
-    cover={
-      <img
-        alt="example"
-        src={item.images[0]}
-      />
-    }
-    actions={[
-      <EllipsisOutlined className='scale-[1.5]' key="ellipsis" />,
-      <HeartOutlined className='scale-[1.5]'/>,
-      <ShoppingCartOutlined className='scale-[1.5]'/>
-    ]}
-  >
-    <Meta
-      avatar={<Avatar src={item.category.image}/>}
-      title={item.title}
-      description={<p className='line-clamp-3'><b>Description:</b>{item.description}</p>}
+  style={{
+    width: 300,
+    borderRadius: '10px', 
+    overflow: 'hidden',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease', 
+  }}
+  cover={
+    <img
+      alt="example"
+      src={item.images[0]}
+      style={{
+        height: '200px',
+        objectFit: 'cover', 
+         cursor:"pointer"
+      }}
     />
-  </Card>
+  }
+  actions={[
+    <EllipsisOutlined className='scale-[1.5] hover:text-gray-700 transition-colors duration-200' key="ellipsis" />,
+    <HeartOutlined className='scale-[1.5] hover:text-red-500 transition-colors duration-200' key="heart" />,
+    <ShoppingCartOutlined className='scale-[1.5] hover:text-green-500 transition-colors duration-200' key="cart" />
+  ]}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = 'scale(1.05)'; 
+    e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.2)'; 
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = 'scale(1)'; 
+    e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+  }}
+>
+  <Meta
+    avatar={<Avatar src={item.category.image} size={40} />} 
+    title={<h3 className='font-semibold text-lg text-gray-800'>{item.title}</h3>}
+    description={
+      <p className='line-clamp-3 text-gray-600 mt-2'>
+        <b className='text-gray-800'>Description: </b>
+        {item.description}
+      </p>
+    }
+  />
+</Card>
   )
 }
 
